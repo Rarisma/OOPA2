@@ -1,6 +1,3 @@
-using System.Security.Principal;
-using Microsoft.VisualBasic;
-
 namespace OOPA2;
 
 
@@ -59,6 +56,18 @@ public class SevensOut : Game
 
 		    Console.WriteLine($"P1 Points {Player1Points}\tP2 Points {Player2Points}");
 	    }
+
+		if (Player1Points > Player2Points) 
+		{
+			Console.WriteLine("Player 1 Wins");
+			Statistics.Instance.SevensAndOutsP1Wins++;
+		}
+		else if (Player1Points < Player2Points) 
+		{
+			Console.WriteLine("Player 2 Wins");
+			Statistics.Instance.SevensAndOutsP2Wins++;
+        }
+		else { Console.WriteLine("Its a tie!"); }
     }
     
     /// <summary>

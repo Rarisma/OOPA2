@@ -28,7 +28,7 @@ public class ThreeOrMore : Game
 	/// </summary>
 	public void StartGame()
 	{
-		while (Player1Points < 20 || Player2Points < 20)
+		while (Player1Points < 20 && Player2Points < 20)
 		{
 			//Player 1
 			Console.WriteLine("Player 1, press enter to roll your dice.");
@@ -40,10 +40,16 @@ public class ThreeOrMore : Game
 			//Player 2
 			if (!CPUPlayer) //only ask non-computer players to roll their dice.
 			{
-				Console.WriteLine("Player 2, press enter to roll your dice.");
+				Console.WriteLine("\n\nPlayer 2, press enter to roll your dice.");
 				Console.ReadLine();
 			}
-			RollDie();
+			else 
+			{
+				//delay before roll.
+				Console.WriteLine("\n\nPlayer 2 is rolling...");
+                Thread.Sleep(300);
+            }
+            RollDie();
 			AllowReroll = true;
 			CheckRolls(ref Player2Points);
 
@@ -56,12 +62,16 @@ public class ThreeOrMore : Game
 			Statistics.Instance.ThreeOrMoreP1Wins++;
 			Console.WriteLine("Player 1 Wins");
 		}
-		else
+		else if (Player2Points >= 20)
 		{
 			Statistics.Instance.ThreeOrMoreP2Wins++;
 			Console.WriteLine("Player 2 Wins");
 		}
-	}
+        else
+        {
+            Console.WriteLine("Its a tie!");
+        }
+    }
 
 	/// <summary>
 	/// Checks Rolls and applies appropriate rules.
@@ -81,14 +91,14 @@ public class ThreeOrMore : Game
 	            //always re-roll the remaining die.
 	            if (CPUPlayer == false)
 	            {
-					Console.WriteLine("""
+					int Res = Program.LoopedInput("""
                                   You rolled doubles!
                                   Would you like to:
                                     1) Rethrow all die
                                     2) Rethrow remaining die
-                                  """);
-					string Res = Console.ReadLine();
-					if (Res == "1") //re roll all die
+                                  """, 2);
+
+					if (Res == 1) //re roll all die
 					{
 						Console.WriteLine("Re-rolling all die.");
 						RollDie();
@@ -96,23 +106,21 @@ public class ThreeOrMore : Game
 						CheckRolls(ref PlayerPoints);
 						return;
 					}
-					else if (Res != "2") // handle invalid input, users don't get a second chance to keep the game short
-					{
-						Console.WriteLine("Invalid input, re-rolling remaining die.");
-					}
-					
-                }
-	            //Re-roll remaining
-                Console.WriteLine("Re-rolling remaining die.");
-                for (int e = Dice.IndexOf(Dice.First(d => d.LastRoll == i)); e < 5; e++)
-                {
-                    Dice[e].RollDie();
-                }
-                AllowReroll = false;
-				CheckRolls(ref PlayerPoints);
+					else if (Res == 2) //Re-roll remaining die
+                    {
+						Console.WriteLine("Re-rolling remaining die.");
+
+                        for (int e = Dice.IndexOf(Dice.First(d => d.LastRoll == i)); e < 5; e++)
+                        {
+                            Dice[e].RollDie();
+                        }
+                        AllowReroll = false;
+                        CheckRolls(ref PlayerPoints);
+                    }
+                }				
             }
             
-            //Check identical rolls.
+            //Check identical rolls and assign points.
             if (IdenticalRolls == 3) { PlayerPoints += 3; }
             else if (IdenticalRolls == 4) { PlayerPoints += 6; }
             else if (IdenticalRolls == 5) { PlayerPoints += 12; }

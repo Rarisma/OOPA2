@@ -97,4 +97,30 @@ public class Statistics
         catch (Exception e) { Console.WriteLine($"Failed to save file due to: {e.Message}"); }
 
     }
+
+    /// <summary>
+    /// Shows all the statistics.
+    /// </summary>
+    public static void ShowStats()
+    {
+        //Display stats in nice neat way
+        Console.WriteLine($"""
+                            === Statistics ===
+                            General:
+                            Dice Rolled: {Instance.DiceRolled}
+                            Player 1 Wins (Total): {Instance.ThreeOrMoreP1Wins + Instance.SevensAndOutsP1Wins}
+                            Player 2 Wins (Total): {Instance.ThreeOrMoreP2Wins + Instance.SevensAndOutsP2Wins}
+                                Games played (Total): {Instance.SevensAndOutsPlays + Instance.ThreeOrMorePlays}
+                            
+                            Three or More:
+                            Player 1 Wins: {Instance.ThreeOrMoreP1Wins}
+                            Player 2 Wins: {Instance.ThreeOrMoreP2Wins}
+                                Games Played: {Instance.ThreeOrMorePlays}
+                                
+                            Sevens and out:
+                            Player 1 Wins: {Instance.SevensAndOutsP1Wins}
+                            Player 2 Wins: {Instance.SevensAndOutsP2Wins}
+                                Games Played: {Instance.SevensAndOutsPlays}
+                            """);
+    }
 }

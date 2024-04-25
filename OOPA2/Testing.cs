@@ -8,6 +8,11 @@ public class Testing : ITestData
 	public bool RollDicePassed { get; set; }
 	public bool ThreeOrMoreTestPassed { get; set; }
 	public DateTime TestsRan { get; set; }
+
+	/// <summary>
+	/// Runs all tests
+	/// </summary>
+	/// <returns>ITestData Object containing test result data.</returns>
 	public ITestData RunAllTests()
 	{
 		RollDicePassed = TestDice(1000); //Test dice 1000 times
@@ -17,64 +22,62 @@ public class Testing : ITestData
 		return (ITestData)this;
 	}
 	
-	
+	/// <summary>
+	/// Test dice rolling
+	/// </summary>
+	/// <param name="IterationCount">how many times to loop (1000 recomended)</param>
+	/// <returns>False if failed, true if otherwise</returns>
 	private bool TestDice(int IterationCount)
 	{
 		Die D = new();
-		try
-		{
-			for (int i = 0; i < IterationCount; i++)
-			{
-				Debug.Assert(D.RollDie() < 7, "Dice rolled higher than 6!");
-				Debug.Assert(D.RollDie() >= 1, "Dice rolled lower than 1!");
-			}
+        for (int i = 0; i < IterationCount; i++)
+        {
+            D.RollDie(); //roll die
 
-		}
-		catch
-		{
-			Console.WriteLine("[Dice Test] Test Failed.");
-			return false;
-		}
+            //Bounds check
+            Debug.Assert(D.LastRoll < 7, "Dice rolled higher than 6!");
+            Debug.Assert(D.LastRoll >= 1, "Dice rolled lower than 1!");
+            if (D.LastRoll >= 1 == false || D.LastRoll < 7 == false)
+            {
+                Console.WriteLine("[Dice Test] Test Failed.");
+				return false;
+            }
+        }
 
 		Console.WriteLine("[Dice Test] Test Passed.");
 		return true;
 	}
 
-	/// <summary>
-	/// Tests if the sevens or more code detects seven correctly
-	/// </summary>
-	private static bool SevenOrMoreTotalTest()
+    /// <summary>
+    /// Tests if the sevens or more code detects seven correctly
+    /// </summary>
+    /// <returns>True if test passed, false otherwise.</returns>
+    private static bool SevenOrMoreTotalTest()
 	{
-		SevensOut S = new();
+        SevensOut S = new();
 
-		try
-		{
-			//Check player 1 isn't already out.
-			Debug.Assert(S.Player1Out == false, "Player 1 is already out even after instantiating.");
-		}
-		catch (Exception e) { return false; }
-
+        //Check player 1 isn't already out.
+        Debug.Assert(S.Player1Out == false, "Player 1 is already out even after instantiating.");
+        if (S.Player1Out != false) { return false; }
 		
 		//Provide list of dice that add to seven.
-		S.Dice = new()
-		{
-			new(4),
-			new(3)
-		};
+		S.Dice = new() { new(4), new(3) };
 		
 		//check rolls as player this should mark player 1 as out.
 		//as player 1 has rolled a 3 and a 4, equaling 7
 		S.CheckRolls(ref S.Player1Points);
 
-		try
-		{
-			Debug.Assert(S.Player1Out, "Player 1 isn't out despite rolling a seven.");
-		}
-		catch (Exception e) { return false; }
+        Debug.Assert(S.Player1Out, "Player 1 isn't out despite rolling a seven.");
 
-		return S.Player1Out;
+        //Test passed if player 1 is out.
+        Console.WriteLine($"[Sevens and out Test] Test {(S.Player1Out == true ? "passed" : "failed" )}");
+        return S.Player1Out;
 	}
 
+	/// <summary>
+	/// Checks three more win condition logic
+	/// </summary>
+	/// <returns>True if test passed, false otherwise.</returns>
 	private bool ThreeOrMore20Test()
 	{
 		//Checks that player 1 has won
@@ -82,9 +85,19 @@ public class Testing : ITestData
 		var prev = Statistics.Instance.ThreeOrMoreP1Wins;
 		T.Player1Points = 120; //20 points is required to win so this will force a P1 win
 		T.Player2Points = 2;
-		
-		Debug.Assert(prev+1 == Statistics.Instance.ThreeOrMoreP1Wins);
-		T.StartGame();
-		return false;
+
+        T.StartGame();
+
+		//Check player 1 has won
+		bool res = prev + 1 == Statistics.Instance.ThreeOrMoreP1Wins;
+        Debug.Assert(prev+1 == Statistics.Instance.ThreeOrMoreP1Wins);
+
+		if (res) //Remove win point if one has been assigned.
+		{
+            //Decrease win stat so we don't mess with statistics.
+            Statistics.Instance.ThreeOrMoreP1Wins--; 
+        }
+
+        return false;
 	}
 }

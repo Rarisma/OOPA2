@@ -1,8 +1,20 @@
 namespace OOPA2;
 
+/// <summary>
+/// This class provides a basic implementation of a game,
+/// it provides common code for dice game such as initalising a
+/// number of dice, storing player points, etc.
+/// </summary>
 public abstract class Game
 {
+    /// <summary>
+    /// Amount of points player 1 has
+    /// </summary>
     public int Player1Points = 0;
+
+    /// <summary>
+    /// ammount of points player 2 has
+    /// </summary>
     public int Player2Points = 0;
 
 	/// <summary>

@@ -15,7 +15,7 @@ public class Die
     /// Create a new die object with but allows the last roll
     /// to be set for testing
     /// </summary>
-    /// <param name="LastRoll"></param>
+    /// <param name="LastRoll">Value of last roll.</param>
     public Die(int LastRoll)
     {
         roll = LastRoll;
