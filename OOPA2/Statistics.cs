@@ -76,7 +76,7 @@ public class Statistics
             }
         }
         //Catch any errors that could happen like IO or serialisation issues.
-        catch (Exception e) {  Console.WriteLine($"Failed to load statistics due to {e.Message}"); }
+        catch (Exception e) {  Console.WriteLine($"Failed to load statistics due to {e.Message} {e.StackTrace}"); }
 
 
     }
@@ -94,7 +94,7 @@ public class Statistics
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "//stats.json", Content);
         }
         //Catch any errors like IO or serialisation issues
-        catch (Exception e) { Console.WriteLine($"Failed to save file due to: {e.Message}"); }
+        catch (Exception e) { Console.WriteLine($"Failed to save file due to: {e.Message} {e.StackTrace}"); }
 
     }
 

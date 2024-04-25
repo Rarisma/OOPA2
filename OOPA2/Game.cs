@@ -44,35 +44,17 @@ public abstract class Game
 	        CPUPlayer = true;
 	        return;
         }
-        
-        //Ask user if they are playing the computer or another person
-        //Loop until valid input is entered.
-        while (true)
-        {
-	        Console.WriteLine("""
-	                          Who are you playing against
-	                          1) Another Person
-	                          2) The Computer
-	                          """);
-	        
-	        var Result = Console.ReadLine();
-	        if (Result == "1")
-	        {
-		        CPUPlayer = false;
-		        break;
-	        }
-	        else if (Result == "2")
-	        {
-		        CPUPlayer = true;
-		        break;
-	        }
-	        else
-	        {
-		        Console.WriteLine("That's not quite right, try entering a 2 or a 1.");
-	        }
-        }
 
-	}
+        //Ask user if they are playing the computer or another person
+        int Result = Program.LoopedInput("""
+                                      Who are you playing against
+                                      1) Another Person
+                                      2) The Computer
+                                      """, 2);
+
+        //Set to computer user if second option pressed
+        CPUPlayer = Result == 2;
+    }
 
     /// <summary>
     /// Rolls every dice.

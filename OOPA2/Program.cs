@@ -71,7 +71,7 @@ public class Program
 	{
 		int Option = -1;
 		//Loop until an option within the accepted range is entered.
-		while (Option < 0 || Option > OptionsCount)
+		while (Option <= 0 || Option > OptionsCount)
 		{
 			//Print Message
             Console.WriteLine(Message);

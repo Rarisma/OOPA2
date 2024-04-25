@@ -98,6 +98,7 @@ public class Testing : ITestData
             Statistics.Instance.ThreeOrMoreP1Wins--; 
         }
 
+		Console.WriteLine($"[Three or more Test ] Test {(res ? "passed" : "failed")}");
         return res;
 	}
 }
