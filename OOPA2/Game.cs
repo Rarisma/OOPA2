@@ -31,13 +31,20 @@ public abstract class Game
     /// Initializes the game, creates die objects
     /// </summary>
     /// <param name="DieCount">Amount of die the game uses.</param>
-    protected Game(int DieCount)
+    /// <param name="TestMode">Skip computer dialog</param>
+    protected Game(int DieCount, bool TestMode = false)
     {
         for (int i = 0; DieCount > i; i++)
         {
             Dice.Add(new Die());
         }
 
+        if (TestMode)
+        {
+	        CPUPlayer = true;
+	        return;
+        }
+        
         //Ask user if they are playing the computer or another person
         //Loop until valid input is entered.
         while (true)

@@ -16,12 +16,20 @@ namespace OOPA2;
 public class ThreeOrMore : Game
 {
 	/// <summary>
-	/// Prevents the user from re-rolling multiple time ad infinium
-	/// in a single turn.
+	/// Prevents the user from re-rolling multiple times in a single turn.
 	/// </summary>
 	private bool AllowReroll = true;
 
+	/// <summary>
+	/// Creates a new three or more object
+	/// </summary>
 	public ThreeOrMore() : base(5) { }
+	
+	/// <summary>
+	/// Creates a new Three or more object
+	/// </summary>
+	/// <param name="TestMode">set to true to skip player or computer opponent dialog</param>
+	public ThreeOrMore(bool TestMode) : base(5, TestMode) { }
 
 	/// <summary>
 	/// Starts the game loop
@@ -89,7 +97,7 @@ public class ThreeOrMore : Game
             {
 	            //Only ask user if they want to re-roll, the computer will just 
 	            //always re-roll the remaining die.
-	            if (CPUPlayer == false)
+	            if (CPUPlayer == false || PlayerPoints == Player1Points)
 	            {
 					int Res = Program.LoopedInput("""
                                   You rolled doubles!

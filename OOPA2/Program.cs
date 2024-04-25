@@ -43,8 +43,8 @@ public class Program
 						                     Dice test Passed {TestResults.RollDicePassed}
 						                     """;
                 Console.WriteLine(ResultData);
-                File.WriteAllText($"TestResultsAsOf{TestResults.TestsRan.Date}.txt", ResultData);
-                Console.WriteLine($"Results saved to TestResultsAsOf{TestResults.TestsRan.Date}");
+                File.WriteAllText($"TestResults.txt", ResultData);
+                Console.WriteLine($"Results saved to TestResults.txt");
                 break;
         }
 
@@ -71,9 +71,9 @@ public class Program
 	{
 		int Option = -1;
 		//Loop until an option within the accepted range is entered.
-		while (Option < 0 || Option > OptionsCount - 1)
+		while (Option < 0 || Option > OptionsCount)
 		{
-			//Print Mesage
+			//Print Message
             Console.WriteLine(Message);
 
 			try

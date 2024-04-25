@@ -22,7 +22,15 @@ public class SevensOut : Game
 	/// </summary>
 	public bool Player2Out = false;
 
+	/// <summary>
+	/// Creates a new sevens and out object
+	/// </summary>
     public SevensOut() : base(2) { }
+	/// <summary>
+	/// creates a new sevens and out object
+	/// </summary>
+	/// <param name="TestMode">Set to true to skip CPU Dialog</param>
+    public SevensOut(bool TestMode) : base(2, TestMode) { }
 
     /// <summary>
     /// Starts the game into a loop

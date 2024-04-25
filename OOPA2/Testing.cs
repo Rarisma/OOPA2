@@ -54,7 +54,7 @@ public class Testing : ITestData
     /// <returns>True if test passed, false otherwise.</returns>
     private static bool SevenOrMoreTotalTest()
 	{
-        SevensOut S = new();
+        SevensOut S = new(true);
 
         //Check player 1 isn't already out.
         Debug.Assert(S.Player1Out == false, "Player 1 is already out even after instantiating.");
@@ -81,7 +81,7 @@ public class Testing : ITestData
 	private bool ThreeOrMore20Test()
 	{
 		//Checks that player 1 has won
-		ThreeOrMore T = new();
+		ThreeOrMore T = new(true);
 		var prev = Statistics.Instance.ThreeOrMoreP1Wins;
 		T.Player1Points = 120; //20 points is required to win so this will force a P1 win
 		T.Player2Points = 2;
@@ -98,6 +98,6 @@ public class Testing : ITestData
             Statistics.Instance.ThreeOrMoreP1Wins--; 
         }
 
-        return false;
+        return res;
 	}
 }

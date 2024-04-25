@@ -16,37 +16,37 @@ public class Statistics
     /// <summary>
     /// Tracks 7s and out plays
     /// </summary>
-    public int SevensAndOutsPlays = 0;
+    public int SevensAndOutsPlays { get; set; }
     
     /// <summary>
     /// Player 1 wins in 7s and out
     /// </summary>
-    public int SevensAndOutsP1Wins = 0;
+    public int SevensAndOutsP1Wins { get; set; }
     
     /// <summary>
     /// Player 2 wins in 7s and out
     /// </summary>
-    public int SevensAndOutsP2Wins = 0;
+    public int SevensAndOutsP2Wins { get; set; }
 
     /// <summary>
     /// Plays in three or more
     /// </summary>
-    public int ThreeOrMorePlays = 0;
+    public int ThreeOrMorePlays { get; set; }
     
     /// <summary>
     /// Player 1 wins in three or more
     /// </summary>
-    public int ThreeOrMoreP1Wins = 0;
+    public int ThreeOrMoreP1Wins { get; set; }
     
     /// <summary>
     /// Player 2 wins in three or more
     /// </summary>
-    public int ThreeOrMoreP2Wins = 0;
+    public int ThreeOrMoreP2Wins { get; set; }
 
     /// <summary>
     /// Number of dice rolled
     /// </summary>
-    public int DiceRolled;
+    public int DiceRolled { get; set; }
 
     /// <summary>
     /// 'Singleton' of statistics
@@ -62,9 +62,9 @@ public class Statistics
         try
         {
             //Check file exists first
-            if (File.Exists("stats.json"))
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "//stats.json"))
             {
-                string Content = File.ReadAllText("stats.json");
+                string Content = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "//stats.json");
                 Instance = JsonSerializer.Deserialize<Statistics>(Content);   
             }
             else
@@ -90,8 +90,8 @@ public class Statistics
         try
         {
             // write file via JSON serialisation
-            string Content = JsonSerializer.Serialize(Instance);
-            File.WriteAllText("stats.json", Content);
+            string Content = JsonSerializer.Serialize<Statistics>(Instance);
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "//stats.json", Content);
         }
         //Catch any errors like IO or serialisation issues
         catch (Exception e) { Console.WriteLine($"Failed to save file due to: {e.Message}"); }
