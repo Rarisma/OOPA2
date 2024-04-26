@@ -129,9 +129,9 @@ public class ThreeOrMore : Game
             }
             
             //Check identical rolls and assign points.
-            if (IdenticalRolls == 3) { PlayerPoints += 3; }
-            else if (IdenticalRolls == 4) { PlayerPoints += 6; }
-            else if (IdenticalRolls == 5) { PlayerPoints += 12; }
+            if (IdenticalRolls == 3) { PlayerPoints += 3; }  //Three of a kind
+            else if (IdenticalRolls == 4) { PlayerPoints += 6; } //Four of a kind
+            else if (IdenticalRolls == 5) { PlayerPoints += 12; } // five of a kind	
         }
     }
 }

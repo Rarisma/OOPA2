@@ -2,7 +2,7 @@ namespace OOPA2;
 
 /// <summary>
 /// This class provides a basic implementation of a game,
-/// it provides common code for dice game such as initalising a
+/// it provides common code for dice game such as initialising a
 /// number of dice, storing player points, etc.
 /// </summary>
 public abstract class Game
@@ -13,7 +13,7 @@ public abstract class Game
     public int Player1Points = 0;
 
     /// <summary>
-    /// ammount of points player 2 has
+    /// amount of points player 2 has
     /// </summary>
     public int Player2Points = 0;
 
@@ -34,11 +34,13 @@ public abstract class Game
     /// <param name="TestMode">Skip computer dialog</param>
     protected Game(int DieCount, bool TestMode = false)
     {
+		//Initialise required amount of dice.
         for (int i = 0; DieCount > i; i++)
         {
             Dice.Add(new Die());
         }
 
+		//Don't ask who we are playing against if test mode is enabled.
         if (TestMode)
         {
 	        CPUPlayer = true;
@@ -74,6 +76,6 @@ public abstract class Game
 	/// <summary>
 	/// Implement roll checks that apply the scoring rules for that game
 	/// </summary>
-	/// <param name="Playerpoints"></param>
-    public abstract void CheckRolls(ref int Playerpoints);
+	/// <param name="PlayerPoints"></param>
+    public abstract void CheckRolls(ref int PlayerPoints);
 }

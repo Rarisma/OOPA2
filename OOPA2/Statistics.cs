@@ -55,7 +55,7 @@ public class Statistics
 
 
     /// <summary>
-    /// Sets Instance from a a file named stats.json.
+    /// Sets Instance from a file named stats.json.
     /// </summary>
     public static void LoadInstance()
     {

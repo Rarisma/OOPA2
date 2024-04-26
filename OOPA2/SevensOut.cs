@@ -81,14 +81,15 @@ public class SevensOut : Game
     /// <summary>
     /// Rolls dice, implementing all rules as stated within the brief.   
     /// </summary>
-    /// <param name="PlayPoints">Player ref to add points to</param>
-    public override void CheckRolls(ref int PlayPoints)
+    /// <param name="PlayerPoints">Player ref to add points to</param>
+    public override void CheckRolls(ref int PlayerPoints)
     {
         int total = Dice[0].LastRoll + Dice[1].LastRoll;
 
         if (total == 7) // Total of seven, do nothing.
         {
-			if (PlayPoints == Player1Points)
+			//Set player to out
+			if (PlayerPoints == Player1Points)
 			{
 				Player1Out = true;
 				Console.WriteLine("\n\n\nPlayer 1 IS OUT!");
@@ -103,12 +104,12 @@ public class SevensOut : Game
         else if (Dice[0].LastRoll == Dice[1].LastRoll) // Doubles
         {
 			Console.WriteLine($"You scored {total * 2}");
-            PlayPoints += total * 2;
+            PlayerPoints += total * 2;
         }
         else // Any other non-seven or non-double value
         {
 	        Console.WriteLine($"You scored {total}");
-			PlayPoints += total;
+			PlayerPoints += total;
         }
     }
 }

@@ -7,7 +7,6 @@ public interface ITestData
 {
     /// <summary>
     /// Has the sevens and out test passed
-    /// ()
     /// </summary>
     public bool SevensAndOutTestPassed { get; set; }
 
@@ -19,7 +18,6 @@ public interface ITestData
 
     /// <summary>
     /// Has the three or more tests passed?
-    /// ()
     /// </summary>
     public bool ThreeOrMoreTestPassed { get; set; }
 

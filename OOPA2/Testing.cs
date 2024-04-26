@@ -4,9 +4,24 @@ namespace OOPA2;
 
 public class Testing : ITestData
 {
+	/// <summary>
+	/// Has the sevens and out test passed
+	/// </summary>
 	public bool SevensAndOutTestPassed { get; set; }
+
+	/// <summary>
+	/// Has the Dice test passed
+	/// </summary>
 	public bool RollDicePassed { get; set; }
+
+	/// <summary>
+	/// Has the three or more test passed
+	/// </summary>
 	public bool ThreeOrMoreTestPassed { get; set; }
+
+	/// <summary>
+	/// When were the tests last ran?
+	/// </summary>
 	public DateTime TestsRan { get; set; }
 
 	/// <summary>
